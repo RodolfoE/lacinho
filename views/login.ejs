@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<script>
+
+    function execRequisicaoHttp(type, url, filtro) {
+    return $.ajax({
+        type: "POST",
+        url: url,
+        data: filtro,
+        contentType: 'application/json'
+    });
+    }
+
+
+    $(async () => {
+        try{
+            let {auth, token} = await execRequisicaoHttp('post', '/user/login',  JSON.stringify({user: 'admin', password: '123'}));
+            localStorage.setItem("token", token);
+        } catch (err){
+            console.log('deu zebra');
+        }
+        
+    })
+</script>
+<body>
+    nome: <input type="text" id="login"/>
+    senha: <input type="text" id="senha"/>
+</body>
+</html>
